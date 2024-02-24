@@ -19,7 +19,7 @@
 <body>
 
     <% if (name) { %>
-        <div class="flex justify-center">
+        <div class="flex justify-center px-5">
             <div class="w-full max-w-4xl">
                 <%- include('./App/nav') %>
             </div>
@@ -59,10 +59,14 @@
                             <p><%= errorlogin %></p>
                         </div>
                     <% } %>
-                    <form action="/login" method="POST" class="flex gap-5 items-center">
+                    <form action="/login" method="POST" class="sm:flex gap-5 items-center">
                         <label for="name">กรุณาใส่ชื่อ</label>
-                        <input type="text" id="name" name="name" required class="border rounded-md px-2 py-1">
-                        <button type="submit" class="border border-indigo-500 px-5 py-1 text-indigo-500 rounded-md hover:bg-indigo-500 hover:text-white transition">เข้าสู่ระบบ</button>
+                        <div class="py-3 sm: py-0">
+                            <input type="text" id="name" name="name" required class="border rounded-md px-2 py-1">
+                        </div>
+                        <div>
+                            <button type="submit" class="border border-indigo-500 px-5 py-1 text-indigo-500 rounded-md hover:bg-indigo-500 hover:text-white transition">เข้าสู่ระบบ</button>
+                        </div>
                       </form>
                 </div>
             </div>
