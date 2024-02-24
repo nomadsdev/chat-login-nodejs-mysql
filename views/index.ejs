@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@500&display=swap" rel="stylesheet">
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        *{
+            font-family: "Noto Sans Thai", sans-serif;
+        }
+    </style>
+</head>
+<body>
+
+    <% if (name) { %>
+        <div class="flex justify-center">
+            <div class="w-full max-w-4xl">
+                <%- include('./App/nav') %>
+            </div>
+        </div>
+        <div class="flex justify-center px-5">
+          <div class="w-full max-w-4xl">
+            <div class="w-full p-5 pb-3 rounded-md border">
+                <div class="w-full h-[200px] overflow-y-auto">
+                    <% if (chats && chats.length > 0) { %>
+                        <% chats.forEach(chat => { %>
+                          <p><span class="text-indigo-500"><%= chat.user_name %>:</span> <%= chat.message %></p>
+                        <% }); %>
+                    <% } else { %>
+                        <p>ไม่มีข้อความ</p>
+                    <% } %>
+                </div>
+                <% if (typeof error !== 'undefined') { %>
+                    <div class="w-full text-red-500 bg-red-200 rounded-md py-1 my-3 flex gap-2 justify-center">
+                        <p><%= error %></p>
+                    </div>
+                <% } %>
+                <form action="/send" method="POST" class="w-full px-2 py-1 rounded-md border flex justify-between">
+                    <input type="text" name="message" placeholder="พิมพ์ข้อความ" required class="w-full">
+                    <button type="submit" class="p-1 text-white bg-indigo-500 rounded-md flex text-xl px-2 border border-indigo-500 hover:bg-white hover:text-indigo-500 transition">
+                        <ion-icon name="navigate-outline"></ion-icon>
+                    </button>
+                </form>
+            </div>
+          </div>
+        </div>
+      <% } else { %>
+        <div class="flex justify-center px-5 pt-20">
+            <div class="w-full max-w-4xl flex justify-center text-center">
+                <div>
+                    <% if (typeof errorlogin !== 'undefined') { %>
+                        <div class="w-full text-red-500 bg-red-200 rounded-md py-1 my-3 flex gap-2 justify-center">
+                            <p><%= errorlogin %></p>
+                        </div>
+                    <% } %>
+                    <form action="/login" method="POST" class="flex gap-5 items-center">
+                        <label for="name">กรุณาใส่ชื่อ</label>
+                        <input type="text" id="name" name="name" required class="border rounded-md px-2 py-1">
+                        <button type="submit" class="border border-indigo-500 px-5 py-1 text-indigo-500 rounded-md hover:bg-indigo-500 hover:text-white transition">เข้าสู่ระบบ</button>
+                      </form>
+                </div>
+            </div>
+        </div>
+    <% } %>
+    
+</body>
+</html>
